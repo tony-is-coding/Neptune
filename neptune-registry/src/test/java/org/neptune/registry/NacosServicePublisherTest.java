@@ -14,8 +14,7 @@ class NacosServicePublisherTest {
                 "127.0.0.1", "8848"
         );
 
-        ServiceMeta serviceMeta = new ServiceMeta();
-        serviceMeta.setServerVersion("1.0.0");
+        ServiceMetadata serviceMeta = new ServiceMetadata();
         serviceMeta.setServerName("demo-service");
         serviceMeta.setGroup("default");
 

@@ -15,7 +15,7 @@
  */
 package org.neptune.rpc.client;
 
-import org.neptune.registry.ServiceMeta;
+import org.neptune.registry.ServiceMetadata;
 import org.neptune.rpc.client.cluster.ClusterInvoker;
 import org.neptune.rpc.client.cluster.ClusterInvokerFactory;
 import org.neptune.rpc.client.handler.ByteBuddyInvocationHandlerBridge;
@@ -44,7 +44,7 @@ public class ProxyFactory<I> {
     // 接口类型
     private final Class<I> interfaceClass;
 
-    private ServiceMeta serviceMeta;
+    private ServiceMetadata serviceMeta;
     private Client client;
     private FactoryProxy factoryProxy;
 
@@ -53,7 +53,7 @@ public class ProxyFactory<I> {
         return new ProxyFactory<>(interfaceClass);
     }
 
-    public ProxyFactory<I> serviceMeta( ServiceMeta serviceMeta) {
+    public ProxyFactory<I> serviceMeta( ServiceMetadata serviceMeta) {
         this.serviceMeta = serviceMeta;
         return this;
     }

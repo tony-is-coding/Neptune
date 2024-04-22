@@ -15,11 +15,8 @@
  */
 package org.neptune.rpc.client;
 
-import com.alibaba.fastjson2.JSON;
-import io.netty.handler.codec.http.multipart.HttpPostRequestDecoder;
 import lombok.extern.slf4j.Slf4j;
 import org.neptune.common.UnresolvedAddress;
-import org.neptune.common.util.Strings;
 import org.neptune.registry.*;
 import org.neptune.rpc.annotation.RpcService;
 import org.neptune.transport.connection.ConnectionGroup;
@@ -69,17 +66,17 @@ public class DefaultClient implements Client {
 
     @Override
     public <T> ProxyFactory<T> proxy(Class<T> clz) {
-        ServiceMeta serviceMeta = parseServiceMeta(clz);
+        ServiceMetadata serviceMeta = parseServiceMeta(clz);
         return proxy(clz, serviceMeta, FactoryProxy.defaultFactoryProxy());
     }
 
     @Override
-    public <T> ProxyFactory<T> proxy(Class<T> clz, ServiceMeta serviceMeta) {
+    public <T> ProxyFactory<T> proxy(Class<T> clz, ServiceMetadata serviceMeta) {
         return proxy(clz, serviceMeta,FactoryProxy.defaultFactoryProxy());
     }
 
     @Override
-    public <T> ProxyFactory<T> proxy(Class<T> clz, ServiceMeta serviceMeta, FactoryProxy factoryProxy) {
+    public <T> ProxyFactory<T> proxy(Class<T> clz, ServiceMetadata serviceMeta, FactoryProxy factoryProxy) {
 
         watchForServerAvailable(serviceMeta).waitForAvailable();
 
@@ -104,11 +101,11 @@ public class DefaultClient implements Client {
     }
 
     @Override
-    public  ServiceSubscriber.Watcher watchForServerAvailable(ServiceMeta serviceMeta) {
+    public  ServiceSubscriber.Watcher watchForServerAvailable(ServiceMetadata serviceMeta) {
         return watchForService0(serviceMeta);
     }
 
-    private ServiceMeta parseServiceMeta(Class<?> interfaceClass) {
+    private ServiceMetadata parseServiceMeta(Class<?> interfaceClass) {
         if (!interfaceClass.isInterface()) {
             throw new RuntimeException("proxy class must by an interface type");
         }
@@ -118,13 +115,12 @@ public class DefaultClient implements Client {
         }
 
         String appName = annotation.name();
-        String appVersion = annotation.version();
         String group = annotation.group();
-        return new ServiceMeta(appName, appVersion, group);
+        return new ServiceMetadata(appName, group);
     }
 
     // 这里主要是考虑要不要 确保有足够的可用的连接在进行 支持到RPC调用 -- 需要同步的把异常抛出来
-    private ServiceSubscriber.Watcher watchForService0(final ServiceMeta serviceMeta) {
+    private ServiceSubscriber.Watcher watchForService0(final ServiceMetadata serviceMeta) {
         ServiceSubscriber.Watcher watcher = new ServiceSubscriber.Watcher() {
             @Override
             public void start() {

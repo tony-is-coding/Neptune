@@ -18,9 +18,6 @@ package org.neptune.example;
 import org.neptune.registry.nacos.NacosServicePublisher;
 import org.neptune.rpc.server.DefaultServer;
 import org.neptune.rpc.server.Server;
-import org.neptune.registry.ServiceMeta;
-import org.neptune.rpc.ServiceProvider;
-import org.neptune.transport.acceptor.NettyAcceptor;
 
 /**
  * org.neptune.example - SimpleServer
@@ -38,7 +35,6 @@ public class SimpleServer {
             );
             server = DefaultServer.builder()
                     .serverName("demo-service")
-                    .version("1.0.0")
                     .group("test")
                     .port(8001)
                     .servicePublisher(nacosServicePublisher)

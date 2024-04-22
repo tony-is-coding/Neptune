@@ -15,11 +15,9 @@
  */
 package org.neptune.rpc.client;
 
-import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.neptune.common.UnresolvedAddress;
-import org.neptune.common.UnresolvedSocketAddress;
-import org.neptune.registry.ServiceMeta;
+import org.neptune.registry.ServiceMetadata;
 import org.neptune.rpc.*;
 import org.neptune.rpc.client.lb.LoadBalancer;
 import org.neptune.rpc.client.lb.LoadBalancerFactory;
@@ -64,7 +62,7 @@ public class DefaultDispatcher implements Dispatcher {
     }
 
     // 匹配一个目标连接来
-    private Channel select(ServiceMeta serviceMeta) {
+    private Channel select(ServiceMetadata serviceMeta) {
         //TODO: load balance 是基于registry 的结果做的
         //TODO: 这一层的抽象还是需要再看看
         UnresolvedAddress address = loadBalancer.select(client.serviceSubscriber().serviceList(serviceMeta));
@@ -76,7 +74,8 @@ public class DefaultDispatcher implements Dispatcher {
         final long invokeId = request.getInvokeId();
 
         // 对象序列化
-        RequestPayload payload = new RequestPayload(invokeId);
+        RequestPayload payload = new RequestPayload();
+        payload.setXid(invokeId);
         payload.setSerialTypeCode(serializer.typeCode());
         payload.setBytes(serializer.writeObject(request.getBody()));
         Channel ch = select(request.getBody().getMetadata());

@@ -15,6 +15,7 @@
  */
 package org.neptune.transport.connection;
 
+import com.alibaba.fastjson2.JSON;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -77,7 +78,7 @@ public class NettyConnection implements Connection {
 
 
     private void attackTo(Channel channel) {
-        log.info("connect succeed");
+        log.info("connect succeed, remote address is:" + JSON.toJSONString(remoteAddress));
         // 考虑这个 attack是在两个场景 1. 首次连接 2.重新连接
         if (!attacked) {
             attacked = true;

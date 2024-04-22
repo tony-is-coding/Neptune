@@ -11,7 +11,7 @@ import org.neptune.common.UnresolvedAddress;
 import org.neptune.common.UnresolvedSocketAddress;
 import org.neptune.registry.AbstractServiceSubscriber;
 import org.neptune.registry.RegistryMeta;
-import org.neptune.registry.ServiceMeta;
+import org.neptune.registry.ServiceMetadata;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class NacosServiceSubscriber extends AbstractServiceSubscriber {
     }
 
     @Override
-    public void subscribe(ServiceMeta serviceMeta, RegistryNotifier notifier) {
+    public void subscribe(ServiceMetadata serviceMeta, RegistryNotifier notifier) {
         String serviceName = serviceMeta.getServerName();
         try{
             namingService.subscribe(serviceName, event -> {
@@ -59,9 +59,8 @@ public class NacosServiceSubscriber extends AbstractServiceSubscriber {
                 for (Instance instance : namedEvent.getInstances()) {
                     RegistryMeta meta = new RegistryMeta();
 
-                    ServiceMeta sm = new ServiceMeta();
+                    ServiceMetadata sm = new ServiceMetadata();
                     sm.setGroup(instance.getMetadata().get("group"));
-                    sm.setServerVersion(instance.getMetadata().get("version"));
                     sm.setServerName(instance.getMetadata().get("appName"));
 
                     UnresolvedAddress addr = new UnresolvedSocketAddress(instance.getIp(), instance.getPort());
@@ -82,7 +81,7 @@ public class NacosServiceSubscriber extends AbstractServiceSubscriber {
     }
 
     @Override
-    public void unsubscribe(ServiceMeta serviceMeta) {
+    public void unsubscribe(ServiceMetadata serviceMeta) {
 
     }
 }

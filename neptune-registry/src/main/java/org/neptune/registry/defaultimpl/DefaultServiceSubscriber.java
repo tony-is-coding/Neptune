@@ -16,9 +16,7 @@
 package org.neptune.registry.defaultimpl;
 
 import org.neptune.registry.AbstractServiceSubscriber;
-import org.neptune.registry.ServiceMeta;
-
-import java.util.Map;
+import org.neptune.registry.ServiceMetadata;
 
 /**
  * org.neptune.rpc.core - DefaultServiceSubscriber
@@ -29,11 +27,11 @@ import java.util.Map;
 public class DefaultServiceSubscriber extends AbstractServiceSubscriber {
 
     @Override
-    public void subscribe(ServiceMeta serviceMeta, RegistryNotifier notifier) {
+    public void subscribe(ServiceMetadata serviceMeta, RegistryNotifier notifier) {
     }
 
     @Override
-    public void unsubscribe(ServiceMeta serviceMeta) {
+    public void unsubscribe(ServiceMetadata serviceMeta) {
 
     }
 

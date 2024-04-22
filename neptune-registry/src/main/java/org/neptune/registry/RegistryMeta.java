@@ -29,36 +29,13 @@ import org.neptune.common.UnresolvedAddress;
 @Getter
 @Setter
 public class RegistryMeta {
-    protected ServiceMeta serviceMeta;
+
+    protected ServiceMetadata serviceMeta;
     protected UnresolvedAddress address;
-    private int wight;
+    private int wight; // 主要是为了摘点流量 + 实现权重轮询
 
-    public int getWight() {
-        return wight;
-    }
-
-    public void setWight(int wight) {
-        this.wight = wight;
-    }
     public RegistryMeta() {
     }
-
-    public void setAddress(UnresolvedAddress address) {
-        this.address = address;
-    }
-
-    public UnresolvedAddress getAddress() {
-        return address;
-    }
-
-    public ServiceMeta getServiceMeta() {
-        return serviceMeta;
-    }
-
-    public void setServiceMeta(ServiceMeta serviceMeta) {
-        this.serviceMeta = serviceMeta;
-    }
-
     public String toUniqueInstanceId(){
         return "default";
     }

@@ -21,23 +21,13 @@ package org.neptune.transport;
  * @author tony-is-coding
  * @date 2021/12/24 14:04
  */
-public class ResponsePayload extends PayloadHolder {
-    private final long xid;
+public class ResponsePayload extends Payload {
     private byte status;
-
-    public ResponsePayload(long xid) {
-        this.xid = xid;
-    }
 
     public byte getStatus() {
         return status;
     }
-
     public void setStatus(byte status) {
         this.status = status;
-    }
-
-    public long getXid() {
-        return xid;
     }
 }

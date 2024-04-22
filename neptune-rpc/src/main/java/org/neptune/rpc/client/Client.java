@@ -15,8 +15,7 @@
  */
 package org.neptune.rpc.client;
 
-import org.neptune.registry.ServiceMeta;
-import org.neptune.rpc.client.ProxyFactory;
+import org.neptune.registry.ServiceMetadata;
 import org.neptune.registry.ServiceSubscriber;
 import org.neptune.transport.connector.Connector;
 
@@ -42,13 +41,13 @@ public interface Client {
 
     <T> ProxyFactory<T> proxy(Class<T> clz);
 
-    <T> ProxyFactory<T> proxy( Class<T> clz, ServiceMeta serviceMeta);
+    <T> ProxyFactory<T> proxy( Class<T> clz, ServiceMetadata serviceMeta);
 
-    <T> ProxyFactory<T> proxy( Class<T> clz, ServiceMeta serviceMeta, FactoryProxy factoryProxy);
+    <T> ProxyFactory<T> proxy(Class<T> clz, ServiceMetadata serviceMeta, FactoryProxy factoryProxy);
 
     <T>  ServiceSubscriber.Watcher  watchForServerAvailable(Class<T> clz);
 
-    ServiceSubscriber.Watcher  watchForServerAvailable(ServiceMeta serviceMeta);
+    ServiceSubscriber.Watcher  watchForServerAvailable(ServiceMetadata serviceMeta);
 
     void shutdownGracefully();
 }

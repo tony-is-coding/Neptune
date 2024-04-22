@@ -15,31 +15,19 @@
  */
 package org.neptune.transport;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * org.neptune.rpc.core - PayloadHolder
  *
  * @author tony-is-coding
  * @date 2021/12/24 13:53
  */
-public class PayloadHolder {
-
+@Setter
+@Getter
+public class Payload {
     private byte serialTypeCode;
-
     private byte[] bytes;  // 实际 请求/响应体 字节数组
-
-    public byte[] getBytes() {
-        return bytes;
-    }
-
-    public void setBytes(byte[] bytes) {
-        this.bytes = bytes;
-    }
-
-    public void setSerialTypeCode(byte serialTypeCode) {
-        this.serialTypeCode = serialTypeCode;
-    }
-
-    public byte getSerialTypeCode() {
-        return serialTypeCode;
-    }
+    private  long xid;
 }

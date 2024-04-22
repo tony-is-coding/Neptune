@@ -20,7 +20,7 @@ import org.neptune.rpc.*;
 import org.neptune.rpc.client.Client;
 import org.neptune.rpc.client.Dispatcher;
 import org.neptune.rpc.client.cluster.ClusterInvoker;
-import org.neptune.registry.ServiceMeta;
+import org.neptune.registry.ServiceMetadata;
 
 /**
  * org.neptune.rpc.consumer - RpcInvoker
@@ -34,7 +34,7 @@ import org.neptune.registry.ServiceMeta;
 public abstract class AbstractInvocationHandler {
 
     protected ClusterInvoker clusterInvoker; // 集群方案应该是要默认支持的
-    protected ServiceMeta serviceMeta;
+    protected ServiceMetadata serviceMeta;
     protected Client client;
     protected Dispatcher dispatcher;
     protected boolean invokeAsync;

@@ -15,7 +15,7 @@
  */
 package org.neptune.rpc;
 
-import org.neptune.registry.ServiceMeta;
+import org.neptune.registry.ServiceMetadata;
 
 import java.io.Serializable;
 
@@ -30,11 +30,11 @@ public class RequestBody implements Serializable {
     private static final long serialVersionUID = 1009813828866652852L;
 
     private String appName;                 // 当前应用 - 应用名称
-    private final ServiceMeta metadata;     // 目标服务元数据
+    private final ServiceMetadata metadata;     // 目标服务元数据
     private String methodName;              // 目标方法名称
     private Object[] args;                  // 目标方法参数
 
-    public RequestBody(ServiceMeta metadata) {
+    public RequestBody(ServiceMetadata metadata) {
         this.metadata = metadata;
     }
 
@@ -46,7 +46,7 @@ public class RequestBody implements Serializable {
         this.appName = appName;
     }
 
-    public ServiceMeta getMetadata() {
+    public ServiceMetadata getMetadata() {
         return metadata;
     }
 

@@ -15,14 +15,14 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public abstract class AbstractServiceSubscriber implements ServiceSubscriber{
 
-    private final ConcurrentHashMap<ServiceMeta, ConcurrentSet<RegistryMeta>> SERVICE_PROVIDER_MAP = new ConcurrentHashMap<>(128);
+    private final ConcurrentHashMap<ServiceMetadata, ConcurrentSet<RegistryMeta>> SERVICE_PROVIDER_MAP = new ConcurrentHashMap<>(128);
 
     @Override
     public Map<Object, Integer> consumers() {
         return null;
     }
 
-    protected void updateServiceList(final ServiceMeta serviceMeta, List<RegistryMeta> serviceProviders){
+    protected void updateServiceList(final ServiceMetadata serviceMeta, List<RegistryMeta> serviceProviders){
         synchronized (SERVICE_PROVIDER_MAP){
             ConcurrentSet<RegistryMeta> registryMetas = SERVICE_PROVIDER_MAP.getOrDefault(serviceMeta, new ConcurrentSet<>());
             registryMetas.addAll(serviceProviders);
@@ -31,7 +31,7 @@ public abstract class AbstractServiceSubscriber implements ServiceSubscriber{
     }
 
     @Override
-    public Set<RegistryMeta> serviceList(ServiceMeta serviceMeta) {
+    public Set<RegistryMeta> serviceList(ServiceMetadata serviceMeta) {
         return SERVICE_PROVIDER_MAP.get(serviceMeta);
     }
 }

@@ -15,7 +15,7 @@
  */
 package org.neptune.rpc.client.handler;
 
-import org.neptune.registry.ServiceMeta;
+import org.neptune.registry.ServiceMetadata;
 import org.neptune.rpc.client.Client;
 import org.neptune.rpc.client.Dispatcher;
 import org.neptune.rpc.client.cluster.ClusterInvoker;
@@ -34,7 +34,7 @@ import java.lang.reflect.Method;
 public class ByteBuddyInvocationHandlerBridge extends AbstractInvocationHandler {
 
     public ByteBuddyInvocationHandlerBridge(ClusterInvoker clusterInvoker,
-                                            ServiceMeta meta,
+                                            ServiceMetadata meta,
                                             Client client,
                                             Dispatcher dispatcher, boolean invokeAsync) {
         this.clusterInvoker = clusterInvoker;

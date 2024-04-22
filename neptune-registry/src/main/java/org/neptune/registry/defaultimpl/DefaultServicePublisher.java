@@ -17,11 +17,8 @@ package org.neptune.registry.defaultimpl;
 
 import org.neptune.registry.AbstractServicePublisher;
 import org.neptune.registry.RegistryMeta;
-import org.neptune.registry.ServiceMeta;
-import org.neptune.registry.ServiceSubscriber;
 
 
-import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**

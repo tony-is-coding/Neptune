@@ -41,8 +41,8 @@ public enum Status {
         this.description = description;
     }
 
-    private byte value;
-    private String description;
+    private final byte value;
+    private final String description;
 
     public static Status parse(byte value) {
         for (Status s : values()) {

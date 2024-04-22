@@ -32,21 +32,19 @@ import java.util.Objects;
 @ToString
 @Getter
 @Setter
-public class ServiceMeta implements Serializable {
+public class ServiceMetadata implements Serializable {
 
     private transient String flatStringCache = null;
     private static final long serialVersionUID = -8908295634641380163L;
 
     protected String group;     // 这个设计是为了 环境隔离
     protected String serverName;   // 应用名称 appid之类的东西
-    protected String serverVersion;   // 服务版本
 
-    public ServiceMeta() {
+    public ServiceMetadata() {
     }
 
-    public ServiceMeta(String serverName, String serverVersion, String group) {
+    public ServiceMetadata(String serverName, String group) {
         this.serverName = serverName;
-        this.serverVersion = serverVersion;
         this.group = group;
     }
 
@@ -57,9 +55,8 @@ public class ServiceMeta implements Serializable {
         StringBuilder buf = new StringBuilder();
         buf.append(getGroup())
                 .append('-')
-                .append(serverName)
-                .append('-')
-                .append(serverVersion);
+                .append(serverName);
+
         flatStringCache = buf.toString();
         return flatStringCache.intern();
     }
@@ -69,15 +66,14 @@ public class ServiceMeta implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ServiceMeta that = (ServiceMeta) o;
+        ServiceMetadata that = (ServiceMetadata) o;
         return
                 Objects.equals(group, that.group) &&
-                Objects.equals(serverName, that.serverName) &&
-                Objects.equals(serverVersion, that.serverVersion);
+                Objects.equals(serverName, that.serverName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(group, serverName, serverVersion);
+        return Objects.hash(group, serverName);
     }
 }

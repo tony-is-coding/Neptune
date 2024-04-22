@@ -79,7 +79,8 @@ public class ProtocolDecoder extends ReplayingDecoder<ProtocolDecoder.State> {
                         byte[] bytes = new byte[length];
                         in.readBytes(bytes);
 
-                        RequestPayload payload = new RequestPayload(header.getInvokeId());
+                        RequestPayload payload = new RequestPayload();
+                        payload.setXid(header.getInvokeId());
                         payload.setBytes(bytes);
                         payload.setSerialTypeCode(header.getSerialTypeCode());
                         out.add(payload);
@@ -90,7 +91,8 @@ public class ProtocolDecoder extends ReplayingDecoder<ProtocolDecoder.State> {
                         byte[] bytes = new byte[length];
                         in.readBytes(bytes);
 
-                        ResponsePayload payload = new ResponsePayload(header.getInvokeId());
+                        ResponsePayload payload = new ResponsePayload();
+                        payload.setXid(header.getInvokeId());
                         payload.setBytes(bytes);
                         payload.setStatus(header.getStatus());
                         payload.setSerialTypeCode(header.getSerialTypeCode());

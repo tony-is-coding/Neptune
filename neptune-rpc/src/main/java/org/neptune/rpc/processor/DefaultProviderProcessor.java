@@ -48,7 +48,8 @@ public class DefaultProviderProcessor implements ProviderProcessor {
         ResponseBody responseBody = new ResponseBody();
         responseBody.setResult("this is an result from remote sever!! good day");
 
-        ResponsePayload payload = new ResponsePayload(request.getXid());
+        ResponsePayload payload = new ResponsePayload();
+        payload.setXid(request.getXid());
         payload.setStatus(Status.OK.value());
         payload.setSerialTypeCode(request.getSerialTypeCode());
         payload.setBytes(serializer.writeObject(responseBody));

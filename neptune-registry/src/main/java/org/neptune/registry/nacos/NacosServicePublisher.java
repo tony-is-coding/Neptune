@@ -7,7 +7,7 @@ import com.alibaba.nacos.api.naming.pojo.Instance;
 import lombok.extern.slf4j.Slf4j;
 import org.neptune.registry.AbstractServicePublisher;
 import org.neptune.registry.RegistryMeta;
-import org.neptune.registry.ServiceMeta;
+import org.neptune.registry.ServiceMetadata;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -40,13 +40,12 @@ public class NacosServicePublisher extends AbstractServicePublisher {
     public void register(RegistryMeta meta, RegisterListener listener) {
         try{
             Instance instance = new Instance();
-            ServiceMeta serviceMeta = meta.getServiceMeta();
+            ServiceMetadata serviceMeta = meta.getServiceMeta();
 
             String serviceName = serviceMeta.getServerName();
             Map<String,String> metadata = new LinkedHashMap<>();
 
             metadata.put("group", serviceMeta.getGroup());
-            metadata.put("version", serviceMeta.getServerVersion());
             metadata.put("appName", serviceMeta.getServerName());
 
             instance.setIp(meta.getAddress().host());
@@ -70,13 +69,12 @@ public class NacosServicePublisher extends AbstractServicePublisher {
     public void unregister(RegistryMeta meta, RegisterListener listener) {
         try{
             Instance instance = new Instance();
-            ServiceMeta serviceMeta = meta.getServiceMeta();
+            ServiceMetadata serviceMeta = meta.getServiceMeta();
 
             String serviceName = serviceMeta.getServerName();
             Map<String,String> metadata = new LinkedHashMap<>();
 
             metadata.put("group", serviceMeta.getGroup());
-            metadata.put("version", serviceMeta.getServerVersion());
             metadata.put("appName", serviceMeta.getServerName());
 
             instance.setIp(meta.getAddress().host());

@@ -21,18 +21,5 @@ package org.neptune.transport;
  * @author tony-is-coding
  * @date 2021/12/24 14:03
  */
-public class RequestPayload extends PayloadHolder {
-    private long xid;
-
-    public RequestPayload(long xid) {
-        this.xid = xid;
-    }
-
-    public void setXid(long xid) {
-        this.xid = xid;
-    }
-
-    public long getXid() {
-        return xid;
-    }
+public class RequestPayload extends Payload {
 }

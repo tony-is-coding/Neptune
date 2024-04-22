@@ -17,7 +17,7 @@ package org.neptune.rpc.server;
 
 import lombok.extern.slf4j.Slf4j;
 import org.neptune.registry.RegistryMeta;
-import org.neptune.registry.ServiceMeta;
+import org.neptune.registry.ServiceMetadata;
 import org.neptune.registry.ServicePublisher;
 import org.neptune.rpc.processor.DefaultProviderProcessor;
 import org.neptune.transport.acceptor.Acceptor;
@@ -40,7 +40,7 @@ public class DefaultServer implements Server {
 
     private String group;
     private String serverName;
-    private String serverVersion;
+
 
     @Override
     public Acceptor acceptor() {
@@ -63,10 +63,9 @@ public class DefaultServer implements Server {
 
     private void doPublishServer(){
         RegistryMeta registryMeta = new RegistryMeta();
-        ServiceMeta serviceMeta = new ServiceMeta();
+        ServiceMetadata serviceMeta = new ServiceMetadata();
 
         serviceMeta.setServerName(serverName);
-        serviceMeta.setServerVersion(serverVersion);
         serviceMeta.setGroup(group);
 
         registryMeta.setWight(100);
@@ -130,11 +129,6 @@ public class DefaultServer implements Server {
 
         public DefaultServer.DefaultServiceBuilder port(int port) {
             innerServer.port = port;
-            return this;
-        }
-
-        public DefaultServer.DefaultServiceBuilder version(String version) {
-            innerServer.serverVersion = version;
             return this;
         }
 
