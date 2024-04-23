@@ -25,8 +25,9 @@ public class Response {
 
     long invokeId;     //  request-response 关联的唯一事务ID;
 
-    ResponseBody body; //  这部分数据需要支持被序列化, 已支持传递到client对端
+    int status; // 结果状态
 
+    ResponseBody body; //  这部分数据需要支持被序列化, 已支持传递到client对端
 
     public Response(long invokeId, ResponseBody body) {
         this.invokeId = invokeId;

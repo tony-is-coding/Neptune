@@ -19,9 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.neptune.registry.RegistryMeta;
 import org.neptune.registry.ServiceMetadata;
 import org.neptune.registry.ServicePublisher;
+import org.neptune.rpc.ServiceProvider;
 import org.neptune.rpc.processor.DefaultProviderProcessor;
 import org.neptune.transport.acceptor.Acceptor;
 import org.neptune.transport.acceptor.NettyAcceptor;
+
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -35,6 +39,7 @@ public class DefaultServer implements Server {
 
     private Acceptor acceptor;
     private ServicePublisher servicePublisher = null;
+
     int port;
     private boolean running = false;
 
@@ -93,19 +98,17 @@ public class DefaultServer implements Server {
     }
 
     @Override
-    public void addProvider(Class<?> providerClass) {
-
+    public void withProviderContainer(ServiceProviderContainer serviceProviderContainer) {
     }
 
     @Override
-    public void addProviders(Class<?>... providerClass) {
-
+    public ServiceProviderContainer providerContainer() {
+        return this;
     }
 
     public static DefaultServiceBuilder builder(){
         return new DefaultServiceBuilder();
     }
-
 
     public static class DefaultServiceBuilder {
         private final DefaultServer innerServer;
@@ -143,6 +146,33 @@ public class DefaultServer implements Server {
             innerServer.acceptor.withProcessor(new DefaultProviderProcessor());
             return innerServer;
         }
+    }
+
+    private static final ConcurrentHashMap<String, ServiceProvider> PROVIDER_CONTAINER = new ConcurrentHashMap<>(16);
+
+    @Override
+    public void registryProvider(Object providerInstance) {
+
+    }
+
+    @Override
+    public void registryProvider(Class<?> providerItf, Object providerInstance) {
+
+    }
+
+    @Override
+    public ServiceProvider lookupProvider(String uniqueKey) {
+        return null;
+    }
+
+    @Override
+    public ServiceProvider removeProvider(String uniqueKey) {
+        return null;
+    }
+
+    @Override
+    public List<ServiceProvider> listAllProviders() {
+        return null;
     }
 
 

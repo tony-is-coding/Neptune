@@ -15,12 +15,7 @@
  */
 package org.neptune.rpc.server;
 
-import org.neptune.registry.ServicePublisher;
-import org.neptune.rpc.ServiceProvider;
 import org.neptune.transport.acceptor.Acceptor;
-
-import java.util.List;
-
 
 /**
  * org.neptune.rpc.core - Server
@@ -28,7 +23,7 @@ import java.util.List;
  * @author tony-is-coding
  * @date 2021/12/21 18:40
  */
-public interface Server {
+public interface Server extends ServiceProviderContainer{
 
     Acceptor acceptor();
 
@@ -38,7 +33,7 @@ public interface Server {
 
     boolean isRunning();
 
-    void addProvider(Class<?> providerClass);
+    void withProviderContainer(ServiceProviderContainer serviceProviderContainer);
 
-    void addProviders(Class<?>... providerClass);
+    ServiceProviderContainer providerContainer();
 }

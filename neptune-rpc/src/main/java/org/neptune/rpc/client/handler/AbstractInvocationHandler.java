@@ -53,7 +53,7 @@ public abstract class AbstractInvocationHandler {
         RequestBody body = new RequestBody(serviceMeta);
         body.setMethodName(methodName);
         body.setArgs(args);
-        body.setAppName(client.getClientAppName());
+        body.setSrcAppName(client.getClientAppName());
         Request request = new Request(10100000L); // TODO: distribute unique ID
         request.setBody(body);
         return request;
